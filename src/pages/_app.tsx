@@ -19,7 +19,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       </Head>
       <div className="mx-auto flex max-w-3xl items-start">
         <Sidebar />
-        <div className="min-h-screen flex-grow border-x ">
+        <div className="min-h-screen flex-grow border-x  ">
           <Component {...pageProps} />
         </div>
       </div>

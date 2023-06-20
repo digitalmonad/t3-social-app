@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import React from "react";
-import { ThumbsUp } from "lucide-react";
+import { Heart } from "lucide-react";
 import { ButtonHoverBgEffect } from "../utils/ButtonHoverBgEffect";
 
 type TLikeButtonProps = {
@@ -21,7 +21,7 @@ export const LikeButton = ({
   if (session.status !== "authenticated") {
     return (
       <div className="mb-1 mt-1 flex items-center gap-3 self-start text-gray-500">
-        <ThumbsUp />
+        <Heart />
         <span>{likeCount}</span>
       </div>
     );
@@ -32,12 +32,12 @@ export const LikeButton = ({
       disabled={isLoading}
       className={`group -ml-2 flex  items-center gap-1 self-start transition duration-300 ${
         likedByMe
-          ? "fill-red-500"
+          ? "fill-purple-500"
           : "fill-gray-500 hover:text-purple-500 focus-visible:text-purple-500"
       }`}
     >
       <ButtonHoverBgEffect color>
-        <ThumbsUp
+        <Heart
           onClick={onClick}
           className={`h-5 w-5 transition duration-300 ${
             likedByMe

@@ -14,7 +14,7 @@ export default function Home() {
     }
   );
 
-  const pageso = posts.data?.pages.flatMap((page) => page.feed);
+  const infinitePosts = posts.data?.pages.flatMap((page) => page.feed);
 
   const handleSubmit = async ({ content }: { content: string }) =>
     void (await createPost.mutateAsync({ content }));
@@ -30,7 +30,7 @@ export default function Home() {
         isLoading={posts.isLoading}
         hasMore={!!posts.hasNextPage}
         fetchNextPage={posts.fetchNextPage}
-        posts={pageso}
+        posts={infinitePosts}
       />
     </>
   );

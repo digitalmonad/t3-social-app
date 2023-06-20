@@ -10,8 +10,8 @@ export function ButtonHoverBgEffect({
   color = false,
 }: TButtonHoverEffectProps) {
   const colorClasses = color
-    ? "outline-purple-400 hover:bg-purple-200 group-hover-bg-purple-200 group-focus-visible:bg-purple-200 focus-visible:bg-purple-200"
-    : "outline-gray-400 hover:bg-gray-200 group-hover-bg-gray-200 group-focus-visible:bg-gray-200 focus-visible:bg-gray-200";
+    ? "outline-purple-400 hover:bg-purple-800/50 group-hover-bg-purple-200 group-focus-visible:bg-purple-200 focus-visible:bg-purple-200"
+    : "outline-zinc-400 hover:bg-zinc-800 group-hover-bg-zinc-200 group-focus-visible:bg-zinc-200 focus-visible:bg-zinc-200";
 
   return (
     <div

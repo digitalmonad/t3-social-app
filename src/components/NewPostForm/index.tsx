@@ -62,11 +62,11 @@ export const NewPostForm = ({ onSubmit }: TNewPostForm) => {
             style={{ height: 0 }}
             value={text}
             onChange={handleTextChange}
-            className="flex-grow resize-none overflow-hidden p-4 text-lg outline-none"
+            className="flex-grow resize-none overflow-hidden bg-background p-4 text-lg outline-none"
             placeholder="What is happening?"
           />
         </div>
-        <Button>Tweet</Button>
+        <Button>Post</Button>
       </form>
     </div>
   );
