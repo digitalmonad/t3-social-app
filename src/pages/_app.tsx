@@ -17,7 +17,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <meta name="description" content="T3 social media app"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container mx-auto flex items-start">
+      <div className="mx-auto flex max-w-3xl items-start">
         <Sidebar />
         <div className="min-h-screen flex-grow border-x ">
           <Component {...pageProps} />

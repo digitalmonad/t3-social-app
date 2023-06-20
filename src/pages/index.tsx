@@ -1,35 +1,37 @@
-import { signIn, signOut, useSession } from "next-auth/react";
-import Head from "next/head";
-import Link from "next/link";
+import { NewPostForm } from "@/components/NewPostForm";
+import { PostsFeed } from "@/components/PostsFeed";
+
+import { api } from "@/utils/api";
 
 export default function Home() {
+  const createPost = api.posts.create.useMutation();
+  const posts = api.posts.infiniteFeed.useInfiniteQuery(
+    {},
+    {
+      getNextPageParam: (lastPage) => {
+        lastPage.nextCursor;
+      },
+    }
+  );
+
+  const pageso = posts.data?.pages.flatMap((page) => page.feed);
+
+  const handleSubmit = async ({ content }: { content: string }) =>
+    void (await createPost.mutateAsync({ content }));
+
   return (
     <>
-      <main>Hi</main>
+      <header className="paper sticky top-0 z-10 flex h-12 items-center border-b px-2">
+        <h1 className="text-lg font-bold">Home</h1>
+      </header>
+      <NewPostForm onSubmit={handleSubmit} />
+      <PostsFeed
+        isError={!!posts.error}
+        isLoading={posts.isLoading}
+        hasMore={!!posts.hasNextPage}
+        fetchNextPage={posts.fetchNextPage}
+        posts={pageso}
+      />
     </>
-  );
-}
-
-function AuthShowcase() {
-  const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => void signOut() : () => void signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
   );
 }
